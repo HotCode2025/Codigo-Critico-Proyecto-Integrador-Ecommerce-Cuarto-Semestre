@@ -1,0 +1,38 @@
+import { Inter, Playfair_Display, Parisienne } from "next/font/google";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
+const parisienne = Parisienne({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+export const metadata = {
+  title: "Altos del Uco — Vinos de bodegas boutique",
+  description: "Vinos de bodegas boutique del Valle de Uco, Mendoza.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="es" className="dark">
+      <body className={`${inter.variable} ${playfair.variable} ${parisienne.variable} antialiased`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
+}
