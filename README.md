@@ -24,7 +24,7 @@ E-commerce de vinos de bodegas boutique del Valle de Uco, Mendoza. Proyecto inte
 
 ## Modelo de datos
 
-4 entidades (`prisma/schema.prisma`): `Usuario`, `Producto`, `Pedido`, `PedidoItem`, más `CarritoItem` (carrito persistente por usuario, separado de `PedidoItem` porque representa un pedido *sin confirmar*). Los modelos están en PascalCase/inglés técnico (convención de Prisma) pero mapeados a tablas en snake_case (`usuarios`, `productos`, etc.) vía `@@map`.
+4 entidades (`prisma/schema.prisma`): `Usuario`, `Producto`, `Pedido`, `PedidoItem`, más `CarritoItem` (carrito persistente por usuario, separado de `PedidoItem` porque representa un pedido *sin confirmar*). Los modelos están en PascalCase/inglés técnico (convención de Prisma) pero mapeados a tablas en snake_case (`usuarios`, `productos`, etc.) vía `@@map`. El diagrama entidad-relación y los estados de un pedido están en [`docs/modelo-de-datos.md`](docs/modelo-de-datos.md); la paleta, la tipografía y el diseño responsive, en [`docs/guia-de-estilo.md`](docs/guia-de-estilo.md).
 
 ## Setup
 
@@ -110,6 +110,33 @@ Después hay que volver a iniciar sesión para que el nuevo JWT incluya el rol a
 `/admin/pedidos` muestra todos los pedidos de todos los usuarios con su dirección de envío. Para los que están `PAGADO`, el admin carga transportista + número de seguimiento y los marca como `ENVIADO`; el cliente ve esa info en el detalle de su pedido. La dirección se pide en el checkout (carrito) antes de generar la preferencia de Mercado Pago.
 
 El costo de envío es una tarifa fija (`COSTO_ENVIO`) con envío gratis a partir de cierto subtotal (`ENVIO_GRATIS_DESDE`), configurables por variable de entorno. Se cobra como un ítem separado ("Envío") en la preferencia de Mercado Pago, y se guarda en `Pedido.costoEnvio` para poder mostrar el desglose subtotal/envío/total en el carrito y en el historial de pedidos.
+
+## Equipo y organización del trabajo
+
+Grupo **Código Crítico** — Programación IV. El proyecto se arma por módulos, cada uno a cargo de un integrante, con sus issues en el [tablero del proyecto](https://github.com/orgs/HotCode2025/projects/149) (marco Scrum, 2 sprints).
+
+| # | Módulo | Responsable | Issues |
+|---|---|---|---|
+| 1 | Base: estructura, modelo de datos, diseño y documentación | Mazara Ariel | ALT-01 a 05 |
+| 2 | Autenticación y recuperación de contraseña | Foglia Maximiliano | ALT-06 a 11 |
+| 3 | Catálogo y ficha de producto | Zuniga Agustina | ALT-12 a 15 |
+| 4 | Carrito y checkout con Mercado Pago | Gonzalez Joel | ALT-16 a 23 |
+| 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
+| 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
+| — | QA, deploy, credenciales y ensayo final | Todo el equipo | ALT-34 a 37 |
+
+Los módulos se integran **en orden** (1 → 6), porque cada uno usa código de los anteriores.
+
+### Flujo de trabajo con Git
+
+1. Partir de `main` actualizado: `git checkout main && git pull`.
+2. Crear una rama propia desde `main` (por ejemplo `feature/catalogo`) y trabajar ahí. **Nadie sube directo a `main`.**
+3. Commitear con el usuario de GitHub propio, con mensajes que digan qué se hizo y terminen en `Refs #n` (el número del issue).
+4. Abrir un **Pull Request** hacia `main` con `Closes #n` en la descripción: al mergearlo, el issue se cierra solo y la tarjeta pasa a *Hecho*.
+5. Otro integrante revisa y aprueba el Pull Request antes del merge.
+6. Nunca subir el `.env` ni claves: se usan las plantillas `backend/.env.example` y `frontend/.env.example`.
+
+Un issue se considera hecho cuando está probado a mano, tiene su Pull Request revisado y mergeado, y su autor puede explicarlo en la defensa.
 
 ## Funcionalidades implementadas
 
