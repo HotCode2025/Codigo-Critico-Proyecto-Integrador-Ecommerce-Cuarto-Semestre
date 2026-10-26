@@ -1,4 +1,5 @@
 import { Inter, Playfair_Display, Parisienne } from "next/font/google";
+import { AuthProvider } from "@/context/auth-context";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "./globals.css";
@@ -29,9 +30,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className="dark">
       <body className={`${inter.variable} ${playfair.variable} ${parisienne.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

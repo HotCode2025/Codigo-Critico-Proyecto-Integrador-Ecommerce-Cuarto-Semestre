@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,6 +24,15 @@ export default function Home() {
             Cultivados con respeto por la tierra del Valle de Uco — pequeñas
             producciones elegidas por su carácter de terroir.
           </p>
+
+          <div className="flex items-center justify-center gap-8 mt-10">
+            <Link
+              href="/registro"
+              className="text-sm text-white/90 hover:text-gold transition-colors"
+            >
+              Crear cuenta →
+            </Link>
+          </div>
         </div>
       </section>
 
