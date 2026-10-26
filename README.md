@@ -113,17 +113,17 @@ El costo de envío es una tarifa fija (`COSTO_ENVIO`) con envío gratis a partir
 
 ## Equipo y organización del trabajo
 
-Grupo **Código Crítico** — Programación IV. El proyecto se arma por módulos, cada uno a cargo de un integrante, con sus issues en el [tablero del proyecto](https://github.com/orgs/HotCode2025/projects/149) (marco Scrum, 2 sprints).
+Grupo **Código Crítico** — Programación IV. El proyecto se arma por módulos, cada uno a cargo de un integrante, con sus issues en el [tablero del proyecto](https://github.com/orgs/HotCode2025/projects/149). Se trabaja con un marco Scrum de 3 sprints (22/10 al 04/11) y la presentación es el 05/11. El detalle de roles, sprints, etiquetas y definición de «Hecho» está en [`docs/organizacion-scrum.md`](docs/organizacion-scrum.md).
 
 | # | Módulo | Responsable | Issues |
 |---|---|---|---|
-| 1 | Base: estructura, modelo de datos, diseño y documentación | Mazara Ariel | ALT-01 a 05 |
+| 1 | Base: estructura, modelo de datos, diseño y documentación | Mazara Ariel | ALT-01 a 05, ALT-39 y ALT-40 |
 | 2 | Autenticación y recuperación de contraseña | Foglia Maximiliano | ALT-06 a 11 |
 | 3 | Catálogo y ficha de producto | Zuniga Agustina | ALT-12 a 15 |
 | 4 | Carrito y checkout con Mercado Pago | Gonzalez Joel | ALT-16 a 23 |
 | 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
 | 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
-| — | QA, deploy, credenciales y ensayo final | Todo el equipo | ALT-34 a 37 |
+| — | QA, deploy, credenciales y ensayo final | Todo el equipo (infraestructura de deploy: Mazara Ariel) | ALT-34 a 38 |
 
 Los módulos se integran **en orden** (1 → 6), porque cada uno usa código de los anteriores.
 
@@ -136,7 +136,7 @@ Los módulos se integran **en orden** (1 → 6), porque cada uno usa código de 
 5. Otro integrante revisa y aprueba el Pull Request antes del merge.
 6. Nunca subir el `.env` ni claves: se usan las plantillas `backend/.env.example` y `frontend/.env.example`.
 
-Un issue se considera hecho cuando está probado a mano, tiene su Pull Request revisado y mergeado, y su autor puede explicarlo en la defensa.
+Un issue se considera hecho cuando está probado a mano, tiene su Pull Request revisado y mergeado, y su autor puede explicarlo en la defensa. Nadie reescribe el historial de `main` (`force push`).
 
 ## Funcionalidades implementadas
 
