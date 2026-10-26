@@ -117,7 +117,7 @@ Grupo **Código Crítico** — Programación IV. El proyecto se arma por módulo
 
 | # | Módulo | Responsable | Issues |
 |---|---|---|---|
-| 1 | Base: estructura, modelo de datos, diseño y documentación | Mazara Ariel | ALT-01 a 05 y ALT-39 |
+| 1 | Base: estructura, modelo de datos, diseño y documentación | Mazara Ariel | ALT-01 a 05, ALT-39 y ALT-40 |
 | 2 | Autenticación y recuperación de contraseña | Foglia Maximiliano | ALT-06 a 11 |
 | 3 | Catálogo y ficha de producto | Zuniga Agustina | ALT-12 a 15 |
 | 4 | Carrito y checkout con Mercado Pago | Gonzalez Joel | ALT-16 a 23 |
