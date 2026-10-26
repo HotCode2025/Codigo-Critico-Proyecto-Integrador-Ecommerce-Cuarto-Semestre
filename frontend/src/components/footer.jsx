@@ -19,6 +19,9 @@ export function Footer() {
             <Link href="/" className="hover:text-gold transition-colors">
               Catálogo
             </Link>
+            <Link href="/carrito" className="hover:text-gold transition-colors">
+              Carrito
+            </Link>
           </nav>
         </div>
 
