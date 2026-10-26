@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Catalogo } from "@/components/catalogo";
+import { Divider } from "@/components/divider";
 
 export default function Home() {
   return (
@@ -26,6 +28,12 @@ export default function Home() {
           </p>
 
           <div className="flex items-center justify-center gap-8 mt-10">
+            <a
+              href="#catalogo"
+              className="rounded-full bg-primary text-primary-foreground px-7 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              Ver catálogo
+            </a>
             <Link
               href="/registro"
               className="text-sm text-white/90 hover:text-gold transition-colors"
@@ -53,6 +61,14 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <main id="catalogo" className="px-8 py-24 sm:px-16 scroll-mt-16">
+        <div className="text-center mb-12">
+          <h2 className="font-serif text-3xl text-foreground mb-4">Nuestra selección</h2>
+          <Divider />
+        </div>
+        <Catalogo />
+      </main>
     </div>
   );
 }
