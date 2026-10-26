@@ -10,7 +10,7 @@ El equipo **Código Crítico** trabaja con un marco Scrum simplificado: un backl
 | Rol | Quién | Qué hace |
 |---|---|---|
 | Product Owner | Mazara Ariel | Es el dueño del Brief: ordena el backlog y decide si un issue cumple lo pedido. |
-| Scrum Master | A definir por el equipo (puede rotar por sprint) | Facilita la reunión diaria, destraba bloqueos y cuida el orden de integración. |
+| Scrum Master | Mazara Ariel | Facilita la reunión diaria, destraba bloqueos y cuida el orden de integración. |
 | Equipo de desarrollo | Los 6 integrantes | Cada uno toma los issues de su módulo. |
 
 ## Sprints
