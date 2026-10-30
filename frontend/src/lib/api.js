@@ -64,3 +64,78 @@ export async function resetearContrasena(token, contrasena) {
 function headersAuth(token) {
   return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
 }
+
+export const EVENTO_CARRITO_ACTUALIZADO = "carrito-actualizado";
+
+function avisarCarritoActualizado() {
+  window.dispatchEvent(new Event(EVENTO_CARRITO_ACTUALIZADO));
+}
+
+export async function obtenerCarrito(token) {
+  const res = await fetch(`${API_URL}/carrito`, { headers: headersAuth(token) });
+  return procesarRespuesta(res);
+}
+
+export async function agregarAlCarrito(token, productoId, cantidad = 1) {
+  const res = await fetch(`${API_URL}/carrito`, {
+    method: "POST",
+    headers: headersAuth(token),
+    body: JSON.stringify({ productoId, cantidad }),
+  });
+  const datos = await procesarRespuesta(res);
+  avisarCarritoActualizado();
+  return datos;
+}
+
+export async function actualizarCantidadCarrito(token, productoId, cantidad) {
+  const res = await fetch(`${API_URL}/carrito/${productoId}`, {
+    method: "PUT",
+    headers: headersAuth(token),
+    body: JSON.stringify({ cantidad }),
+  });
+  const datos = await procesarRespuesta(res);
+  avisarCarritoActualizado();
+  return datos;
+}
+
+export async function eliminarDelCarrito(token, productoId) {
+  const res = await fetch(`${API_URL}/carrito/${productoId}`, {
+    method: "DELETE",
+    headers: headersAuth(token),
+  });
+  if (!res.ok) throw new Error("No se pudo eliminar el producto del carrito");
+  avisarCarritoActualizado();
+}
+
+export async function crearPreferenciaCheckout(token, direccion) {
+  const res = await fetch(`${API_URL}/checkout/crear-preferencia`, {
+    method: "POST",
+    headers: headersAuth(token),
+    body: JSON.stringify(direccion),
+  });
+  const datos = await procesarRespuesta(res);
+  avisarCarritoActualizado();
+  return datos;
+}
+
+export async function obtenerConfigCheckout() {
+  const res = await fetch(`${API_URL}/checkout/config`);
+  return procesarRespuesta(res);
+}
+
+export async function reintentarPedido(token, pedidoId) {
+  const res = await fetch(`${API_URL}/checkout/reintentar/${pedidoId}`, {
+    method: "POST",
+    headers: headersAuth(token),
+  });
+  return procesarRespuesta(res);
+}
+
+export async function confirmarPagoCheckout(token, paymentId) {
+  const res = await fetch(`${API_URL}/checkout/confirmar`, {
+    method: "POST",
+    headers: headersAuth(token),
+    body: JSON.stringify({ paymentId }),
+  });
+  return procesarRespuesta(res);
+}
