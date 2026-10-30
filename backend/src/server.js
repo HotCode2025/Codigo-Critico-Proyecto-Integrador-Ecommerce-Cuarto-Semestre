@@ -1,6 +1,7 @@
 require("dotenv/config");
 const express = require("express");
 const cors = require("cors");
+const adminProductRoutes = require("./routes/adminProducts");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
 const cartRoutes = require("./routes/cart");
@@ -15,6 +16,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+app.use("/api/admin/productos", adminProductRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/productos", productRoutes);
 app.use("/api/carrito", cartRoutes);
