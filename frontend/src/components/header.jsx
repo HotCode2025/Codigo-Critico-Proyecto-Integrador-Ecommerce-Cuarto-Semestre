@@ -18,6 +18,11 @@ export function Header() {
       <div className="flex items-center gap-6 text-sm">
         {usuario ? (
           <>
+            {usuario.rol === "ADMIN" && (
+              <Link href="/admin" className="whitespace-nowrap text-muted-foreground hover:text-gold transition-colors">
+                Panel admin
+              </Link>
+            )}
             <span className="hidden sm:inline text-muted-foreground">
               Hola, {usuario.nombre.split(" ")[0]}
             </span>
