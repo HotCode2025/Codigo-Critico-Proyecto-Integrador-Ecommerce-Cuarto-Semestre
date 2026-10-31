@@ -24,4 +24,25 @@ async function obtenerPorId(req, res) {
   res.json(pedido);
 }
 
-module.exports = { listar, obtenerPorId };
+const ESTADOS_VALIDOS = ["PENDIENTE", "PAGADO", "ENVIADO", "CANCELADO"];
+
+async function listarTodos(req, res) {
+  const { estado } = req.query;
+
+  if (estado && !ESTADOS_VALIDOS.includes(estado)) {
+    return res.status(400).json({ error: "Estado inválido" });
+  }
+
+  const pedidos = await prisma.pedido.findMany({
+    where: estado ? { estado } : undefined,
+    include: {
+      usuario: { select: { nombre: true, email: true } },
+      items: { include: { producto: true } },
+    },
+    orderBy: { fecha: "desc" },
+  });
+
+  res.json(pedidos);
+}
+
+module.exports = { listar, obtenerPorId, listarTodos };
