@@ -43,6 +43,9 @@ export function Header() {
 
         {usuario ? (
           <>
+            <Link href="/pedidos" className="whitespace-nowrap text-muted-foreground hover:text-gold transition-colors">
+              Mis pedidos
+            </Link>
             {usuario.rol === "ADMIN" && (
               <Link href="/admin" className="whitespace-nowrap text-muted-foreground hover:text-gold transition-colors">
                 Panel admin
