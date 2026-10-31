@@ -139,3 +139,13 @@ export async function confirmarPagoCheckout(token, paymentId) {
   });
   return procesarRespuesta(res);
 }
+
+export async function obtenerPedidos(token) {
+  const res = await fetch(`${API_URL}/pedidos`, { headers: headersAuth(token) });
+  return procesarRespuesta(res);
+}
+
+export async function obtenerPedido(token, id) {
+  const res = await fetch(`${API_URL}/pedidos/${id}`, { headers: headersAuth(token) });
+  return procesarRespuesta(res);
+}
