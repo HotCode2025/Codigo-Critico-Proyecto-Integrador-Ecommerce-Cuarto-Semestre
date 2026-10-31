@@ -49,9 +49,14 @@ function TablaProductos() {
           <p className="font-script text-3xl text-gold">Panel de administración</p>
           <h1 className="font-serif text-4xl text-foreground">Productos</h1>
         </div>
-        <Link href="/admin/productos/nuevo">
-          <Button>Nuevo producto</Button>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/admin/pedidos" className="text-sm text-muted-foreground hover:text-gold transition-colors">
+            Ver pedidos y envíos →
+          </Link>
+          <Link href="/admin/productos/nuevo">
+            <Button>Nuevo producto</Button>
+          </Link>
+        </div>
       </div>
 
       {error && <p className="text-sm text-destructive mb-6">{error}</p>}
