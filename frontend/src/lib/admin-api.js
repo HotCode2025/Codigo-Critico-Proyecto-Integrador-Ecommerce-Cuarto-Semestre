@@ -40,3 +40,18 @@ export async function eliminarProducto(token, id) {
   });
   if (!res.ok) await procesarRespuesta(res);
 }
+
+export async function listarPedidosAdmin(token, estado) {
+  const query = estado ? `?estado=${estado}` : "";
+  const res = await fetch(`${API_URL}/pedidos/admin/todos${query}`, { headers: headersAuth(token) });
+  return procesarRespuesta(res);
+}
+
+export async function marcarPedidoEnviado(token, id, datos) {
+  const res = await fetch(`${API_URL}/pedidos/admin/${id}/enviar`, {
+    method: "PATCH",
+    headers: headersAuth(token),
+    body: JSON.stringify(datos),
+  });
+  return procesarRespuesta(res);
+}
