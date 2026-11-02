@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function AuthLayout({ eyebrow, tagline, children }) {
   return (
-    <div className="min-h-[calc(100dvh-65px)] grid lg:grid-cols-2">
+    <div className="min-h-[calc(100dvh-14rem)] lg:min-h-[calc(100dvh-132px)] grid lg:grid-cols-2">
       <div className="relative hidden lg:block">
         <Image
           src="/hero/valle-de-uco-andes.jpg"
