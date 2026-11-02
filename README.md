@@ -126,7 +126,7 @@ Grupo **Código Crítico** — Programación IV. El proyecto se arma por módulo
 | 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
 | 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
 | — | QA, deploy, credenciales y ensayo final | Todo el equipo (infraestructura de deploy: Mazara Ariel) | ALT-34 a 38 |
-| — | Mejoras y arreglos que surgieron del QA (pago del carrito, stock, footer, comprobante y factura de ARCA) | Mazara Ariel | ALT-42 a ALT-48 |
+| — | Mejoras y arreglos que surgieron del QA (pago del carrito, stock, footer, comprobante y factura de ARCA y pago de pedidos cancelados) | Mazara Ariel | ALT-42 a ALT-49 |
 
 Los módulos se integran **en orden** (1 → 6), porque cada uno usa código de los anteriores.
 
