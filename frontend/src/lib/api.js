@@ -149,3 +149,12 @@ export async function obtenerPedido(token, id) {
   const res = await fetch(`${API_URL}/pedidos/${id}`, { headers: headersAuth(token) });
   return procesarRespuesta(res);
 }
+
+export async function solicitarArrepentimiento({ pedidoId, email, motivo }) {
+  const res = await fetch(`${API_URL}/arrepentimiento`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ pedidoId, email, motivo }),
+  });
+  return procesarRespuesta(res);
+}
