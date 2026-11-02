@@ -15,6 +15,17 @@ function esPantallaDeAcceso(ruta) {
 
 const enlace = "text-muted-foreground hover:text-gold transition-colors";
 
+// Los logos son de marcas de terceros: se muestran sin modificar, sobre un recuadro
+// blanco (las guías de uso piden fondo blanco o el color de la marca).
+function LogoMarca({ src, alt, altura }) {
+  return (
+    <span className="inline-flex items-center rounded-md bg-white px-3 py-1.5">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className={`${altura} w-auto`} loading="lazy" />
+    </span>
+  );
+}
+
 function Columna({ titulo, children }) {
   return (
     <div>
@@ -110,6 +121,7 @@ export function Footer() {
               Los pagos los procesa Mercado Pago. Los datos de tu tarjeta nunca pasan por esta tienda ni se
               guardan en ella.
             </p>
+            <LogoMarca src="/logos/mercado-pago.svg" alt="Mercado Pago" altura="h-14" />
           </Columna>
 
           <Columna titulo="Tu tienda">
@@ -128,7 +140,13 @@ export function Footer() {
                 Mis pedidos
               </Link>
             </p>
-            <p className="text-muted-foreground">Envíos a domicilio dentro de Argentina.</p>
+            <p className="text-muted-foreground">
+              Envíos a domicilio dentro de Argentina, con Correo Argentino y Andreani.
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <LogoMarca src="/logos/correo-argentino.png" alt="Correo Argentino" altura="h-7" />
+              <LogoMarca src="/logos/andreani.svg" alt="Andreani" altura="h-6" />
+            </div>
           </Columna>
         </div>
 
