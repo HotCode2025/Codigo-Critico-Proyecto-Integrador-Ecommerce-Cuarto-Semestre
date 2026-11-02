@@ -11,7 +11,6 @@ import {
   eliminarDelCarrito,
   crearPreferenciaCheckout,
 } from "@/lib/api";
-import { abrirCheckoutMercadoPago } from "@/lib/mercadopago";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -92,20 +91,18 @@ export default function CarritoPage() {
 
     setProcesandoPago(true);
     try {
-      const { preferenceId, initPoint } = await crearPreferenciaCheckout(token, {
+      const { initPoint } = await crearPreferenciaCheckout(token, {
         direccionCalle: direccion.calle,
         direccionCiudad: direccion.ciudad,
         direccionProvincia: direccion.provincia,
         direccionCodigoPostal: direccion.codigoPostal,
       });
-      try {
-        await abrirCheckoutMercadoPago(preferenceId);
-        setProcesandoPago(false);
-      } catch {
-        // Si el modal no puede abrirse (SDK bloqueado, sin conexión), caemos
-        // a la redirección clásica al checkout de Mercado Pago.
-        window.location.href = initPoint;
-      }
+      // Siempre se redirige al checkout de Mercado Pago. La ventana flotante
+      // (lib/mercadopago.js) no se usa porque el SDK no avisa cuando no logra
+      // abrirla (pasó en Firefox): el pedido ya estaba creado, el carrito
+      // vaciado y el cliente se quedaba sin ver el pago. El botón queda
+      // deshabilitado hasta que el navegador cambia de página.
+      window.location.href = initPoint;
     } catch (err) {
       setError(err instanceof Error ? err.message : "No se pudo iniciar el pago");
       setProcesandoPago(false);
