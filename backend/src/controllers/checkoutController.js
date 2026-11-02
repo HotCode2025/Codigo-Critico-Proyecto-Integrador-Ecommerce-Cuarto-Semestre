@@ -179,27 +179,39 @@ async function confirmarPago(paymentId) {
   if (!pedidoId) return null;
 
   const pedido = await prisma.pedido.findUnique({ where: { id: pedidoId }, include: { items: true } });
-  if (!pedido || pedido.estado !== "PENDIENTE") return pedido;
+  if (!pedido || pedido.estado === "PAGADO" || pedido.estado === "ENVIADO") return pedido;
+
+  // Un pedido CANCELADO sólo se reactiva con un pago aprobado. Pasa cuando el
+  // cliente dejó abierta una pestaña de pago, tocó «Volver a comprar» (que
+  // cancela el pedido viejo y crea uno nuevo) y después pagó en la pestaña
+  // vieja: Mercado Pago ya cobró, así que el pedido tiene que figurar pagado.
+  if (pedido.estado === "CANCELADO" && pago.status !== "approved") return pedido;
 
   // El webhook de Mercado Pago y /confirmar (el navegador al volver) llaman a
   // esta función casi al mismo tiempo. La lectura de arriba no alcanza para
-  // evitar que los dos procesen el pago: por eso el cambio de estado lleva
-  // "estado: PENDIENTE" en el where. La base lo aplica de forma atómica, así
-  // que sólo una de las llamadas lo logra (count === 1) y descuenta el stock;
-  // la otra ve count === 0 y no hace nada.
+  // evitar que los dos procesen el pago: por eso el cambio de estado lleva el
+  // estado esperado en el where. La base lo aplica de forma atómica, así que
+  // sólo una de las llamadas lo logra (count === 1) y descuenta el stock; la
+  // otra ve count === 0 y no hace nada.
   if (pago.status === "approved") {
     const procesadoAhora = await prisma.$transaction(async (tx) => {
       const { count } = await tx.pedido.updateMany({
-        where: { id: pedidoId, estado: "PENDIENTE" },
+        where: { id: pedidoId, estado: { in: ["PENDIENTE", "CANCELADO"] } },
         data: { estado: "PAGADO" },
       });
       if (count === 0) return false;
 
       for (const item of pedido.items) {
-        await tx.producto.update({
+        const producto = await tx.producto.update({
           where: { id: item.productoId },
           data: { stock: { decrement: item.cantidad } },
         });
+        // Si el pedido se reactivó, el stock pudo venderse a otro cliente en el
+        // medio. El pago ya está cobrado, así que el pedido queda pagado igual;
+        // se deja el aviso para que el administrador lo resuelva.
+        if (producto.stock < 0) {
+          console.warn(`Stock negativo en el producto #${item.productoId} tras pagar el pedido #${pedidoId}`);
+        }
       }
       return true;
     });

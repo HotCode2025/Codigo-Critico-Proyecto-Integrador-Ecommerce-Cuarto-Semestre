@@ -100,6 +100,7 @@ stateDiagram-v2
     [*] --> PENDIENTE: el usuario inicia el checkout
     PENDIENTE --> PAGADO: Mercado Pago aprueba el pago
     PENDIENTE --> CANCELADO: pago rechazado o "volver a comprar"
+    CANCELADO --> PAGADO: llega un pago aprobado de un pedido ya cancelado
     PAGADO --> ENVIADO: el admin carga transportista y seguimiento
 ```
 
