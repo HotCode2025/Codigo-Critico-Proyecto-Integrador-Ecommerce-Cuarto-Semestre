@@ -92,7 +92,7 @@ Lo que se puede mostrar funcionando en producción (https://altos-del-uco-equipo
 |---|---|---|
 | Probar el sitio en Chrome, Edge y un celular real (ALT-38) | Mazara Ariel | 03/11 |
 | Cargar la clave de Resend en Render y probar el mail de recuperación (ALT-36) | Mazara Ariel | 03/11 |
-| Hacer que el carrito redirija siempre al link de pago de Mercado Pago, como «Volver a comprar» (ALT-43, Pull Request #55, con revisión de Gonzalez Joel) | Mazara Ariel | 03/11 |
+| Hacer que el carrito redirija siempre al link de pago de Mercado Pago, como «Volver a comprar» (ALT-43, Pull Request #55, revisado y mergeado por Zuniga Agustina el 02/11) | Mazara Ariel | 03/11 |
 | Rotar las credenciales de Mercado Pago, Neon y Vercel (ALT-36) | Mazara Ariel | 03/11 |
 | Proteger `main` exigiendo Pull Request con aprobación | Mazara Ariel | 03/11 |
 | Dejar un resumen escrito de cada reunión (qué se acordó y quién hace qué) | Scrum Master | Desde el 03/11 |
