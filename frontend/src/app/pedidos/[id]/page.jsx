@@ -152,6 +152,14 @@ export default function DetallePedidoPage() {
           </div>
         )}
 
+        {(pedido.estado === "PAGADO" || pedido.estado === "ENVIADO") && (
+          <div className="border-t border-border/60 pt-6">
+            <Link href={`/pedidos/${pedido.id}/comprobante`} className="text-sm text-gold hover:underline">
+              Ver comprobante de compra →
+            </Link>
+          </div>
+        )}
+
         {sePuedeReintentar && (
           <Button className="w-full" onClick={volverAComprar} disabled={reintentando}>
             {reintentando ? "Redirigiendo a Mercado Pago..." : "Volver a comprar"}

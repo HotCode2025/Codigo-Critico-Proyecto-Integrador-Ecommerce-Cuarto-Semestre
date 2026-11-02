@@ -1,6 +1,7 @@
 const prisma = require("../lib/prisma");
 const { preferenceClient, paymentClient } = require("../lib/mercadopago");
 const { calcularCostoEnvio } = require("../lib/envio");
+const { enviarComprobante } = require("../lib/comprobante");
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 // Mercado Pago rechaza auto_return si las back_urls no son un dominio público
@@ -187,12 +188,12 @@ async function confirmarPago(paymentId) {
   // que sólo una de las llamadas lo logra (count === 1) y descuenta el stock;
   // la otra ve count === 0 y no hace nada.
   if (pago.status === "approved") {
-    await prisma.$transaction(async (tx) => {
+    const procesadoAhora = await prisma.$transaction(async (tx) => {
       const { count } = await tx.pedido.updateMany({
         where: { id: pedidoId, estado: "PENDIENTE" },
         data: { estado: "PAGADO" },
       });
-      if (count === 0) return;
+      if (count === 0) return false;
 
       for (const item of pedido.items) {
         await tx.producto.update({
@@ -200,7 +201,17 @@ async function confirmarPago(paymentId) {
           data: { stock: { decrement: item.cantidad } },
         });
       }
+      return true;
     });
+
+    // El comprobante sale sólo si ESTA llamada fue la que registró el pago, así
+    // llega una vez aunque el webhook y /confirmar se crucen. Si el mail falla,
+    // el pago ya quedó confirmado: sólo se deja registro del error.
+    if (procesadoAhora) {
+      enviarComprobante(pedidoId).catch((err) =>
+        console.error(`No se pudo enviar el comprobante del pedido #${pedidoId}:`, err.message)
+      );
+    }
   } else if (pago.status === "rejected") {
     await prisma.pedido.updateMany({
       where: { id: pedidoId, estado: "PENDIENTE" },
