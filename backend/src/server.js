@@ -7,6 +7,7 @@ const productRoutes = require("./routes/products");
 const cartRoutes = require("./routes/cart");
 const checkoutRoutes = require("./routes/checkout");
 const orderRoutes = require("./routes/orders");
+const arrepentimientoRoutes = require("./routes/arrepentimiento");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/productos", productRoutes);
 app.use("/api/carrito", cartRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/pedidos", orderRoutes);
+app.use("/api/arrepentimiento", arrepentimientoRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
