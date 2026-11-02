@@ -178,7 +178,7 @@ export default function ComprobantePage() {
 
         <p className="text-xs text-muted-foreground border-t border-border/60 pt-4">
           Este comprobante <strong>no es una factura fiscal</strong>. Es la constancia de tu compra en Altos del
-          Uco, un proyecto académico de la materia Programación IV. Pago procesado por Mercado Pago.
+          Uco. Pago procesado por Mercado Pago.
         </p>
       </article>
     </div>

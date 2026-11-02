@@ -66,8 +66,7 @@ function construirHtml(pedido) {
         <a href="${FRONTEND_URL}/pedidos/${pedido.id}">Mis pedidos</a>.</p>
 
       <p style="font-size:12px;color:#777;border-top:1px solid #ddd;padding-top:10px">
-        Este comprobante <strong>no es una factura fiscal</strong>. Es la constancia de tu compra en Altos del Uco,
-        un proyecto académico de la materia Programación IV.
+        Este comprobante <strong>no es una factura fiscal</strong>. Es la constancia de tu compra en Altos del Uco.
       </p>
     </div>`;
 }
