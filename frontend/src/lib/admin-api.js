@@ -55,3 +55,13 @@ export async function marcarPedidoEnviado(token, id, datos) {
   });
   return procesarRespuesta(res);
 }
+
+// El PDF viaja como cuerpo crudo (no JSON), con el nombre original en la URL.
+export async function subirFacturaPedido(token, id, archivo) {
+  const res = await fetch(`${API_URL}/pedidos/admin/${id}/factura?nombre=${encodeURIComponent(archivo.name)}`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/pdf" },
+    body: archivo,
+  });
+  return procesarRespuesta(res);
+}

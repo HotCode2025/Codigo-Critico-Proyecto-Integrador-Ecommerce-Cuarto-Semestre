@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
-import { listarPedidosAdmin, marcarPedidoEnviado } from "@/lib/admin-api";
+import { listarPedidosAdmin, marcarPedidoEnviado, subirFacturaPedido } from "@/lib/admin-api";
+import { descargarFactura } from "@/lib/api";
 import { SoloAdmin } from "@/components/admin/solo-admin";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,6 +71,86 @@ function FormularioEnvio({ pedido, token, onGuardado }) {
       </Button>
       {error && <p className="text-sm text-destructive w-full">{error}</p>}
     </form>
+  );
+}
+
+const TAMANIO_MAXIMO_FACTURA = 2 * 1024 * 1024;
+
+function FormularioFactura({ pedido, token, onGuardado }) {
+  const [archivo, setArchivo] = useState(null);
+  const [clave, setClave] = useState(0);
+  const [subiendo, setSubiendo] = useState(false);
+  const [error, setError] = useState("");
+
+  function elegirArchivo(e) {
+    const elegido = e.target.files[0] || null;
+    setError("");
+    if (elegido && elegido.type !== "application/pdf") {
+      setError("El archivo tiene que ser un PDF");
+      setArchivo(null);
+    } else if (elegido && elegido.size > TAMANIO_MAXIMO_FACTURA) {
+      setError("El PDF supera los 2 MB");
+      setArchivo(null);
+    } else {
+      setArchivo(elegido);
+    }
+  }
+
+  async function subir(e) {
+    e.preventDefault();
+    if (!archivo) return;
+    setError("");
+    setSubiendo(true);
+    try {
+      await subirFacturaPedido(token, pedido.id, archivo);
+      setArchivo(null);
+      setClave((c) => c + 1);
+      onGuardado();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo adjuntar la factura");
+    } finally {
+      setSubiendo(false);
+    }
+  }
+
+  async function descargar() {
+    setError("");
+    try {
+      await descargarFactura(token, pedido.id, pedido.factura.nombreArchivo);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo descargar la factura");
+    }
+  }
+
+  return (
+    <div className="mt-3 pt-3 border-t border-border/40">
+      {pedido.factura ? (
+        <div className="flex items-center justify-between gap-4 mb-2">
+          <p className="text-sm text-muted-foreground">
+            Factura: <span className="text-foreground">{pedido.factura.nombreArchivo}</span> · cargada el{" "}
+            {formatearFecha(pedido.factura.createdAt)}
+          </p>
+          <Button type="button" size="sm" variant="ghost" onClick={descargar}>
+            Descargar
+          </Button>
+        </div>
+      ) : (
+        <p className="text-sm text-muted-foreground mb-2">Sin factura adjunta.</p>
+      )}
+      <form onSubmit={subir} className="flex flex-wrap items-center gap-2">
+        <Input
+          key={clave}
+          type="file"
+          accept="application/pdf"
+          onChange={elegirArchivo}
+          className="w-72"
+        />
+        <Button type="submit" size="sm" variant="outline" disabled={!archivo || subiendo}>
+          {subiendo ? "Subiendo..." : pedido.factura ? "Reemplazar factura" : "Adjuntar factura (PDF)"}
+        </Button>
+      </form>
+      {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+    </div>
   );
 }
 
@@ -176,6 +257,10 @@ function ListaPedidos() {
 
                 {(pedido.estado === "PAGADO" || (pedido.estado === "ENVIADO" && editandoEnvio)) && (
                   <FormularioEnvio pedido={pedido} token={token} onGuardado={alGuardarEnvio} />
+                )}
+
+                {(pedido.estado === "PAGADO" || pedido.estado === "ENVIADO") && (
+                  <FormularioFactura pedido={pedido} token={token} onGuardado={cargarPedidos} />
                 )}
               </div>
             );

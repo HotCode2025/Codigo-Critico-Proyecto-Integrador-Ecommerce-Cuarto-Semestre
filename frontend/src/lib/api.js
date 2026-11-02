@@ -150,6 +150,27 @@ export async function obtenerPedido(token, id) {
   return procesarRespuesta(res);
 }
 
+// La factura es un PDF protegido por token: no se puede abrir con un link
+// directo, así que se pide con el encabezado de autorización y se baja como archivo.
+export async function descargarFactura(token, pedidoId, nombreArchivo) {
+  const res = await fetch(`${API_URL}/pedidos/${pedidoId}/factura`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    const datos = await res.json().catch(() => ({}));
+    throw new Error(datos.error || "No se pudo descargar la factura");
+  }
+
+  const url = URL.createObjectURL(await res.blob());
+  const enlace = document.createElement("a");
+  enlace.href = url;
+  enlace.download = nombreArchivo || `factura-pedido-${pedidoId}.pdf`;
+  document.body.appendChild(enlace);
+  enlace.click();
+  enlace.remove();
+  URL.revokeObjectURL(url);
+}
+
 export async function solicitarArrepentimiento({ pedidoId, email, motivo }) {
   const res = await fetch(`${API_URL}/arrepentimiento`, {
     method: "POST",

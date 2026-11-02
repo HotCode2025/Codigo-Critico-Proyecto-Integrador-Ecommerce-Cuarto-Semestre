@@ -1,9 +1,12 @@
 const prisma = require("../lib/prisma");
 
+// Sólo nombre y fecha: el contenido del PDF se lee únicamente al descargarlo.
+const FACTURA_RESUMEN = { select: { nombreArchivo: true, createdAt: true } };
+
 async function listar(req, res) {
   const pedidos = await prisma.pedido.findMany({
     where: { usuarioId: req.usuario.id },
-    include: { items: { include: { producto: true } } },
+    include: { items: { include: { producto: true } }, factura: FACTURA_RESUMEN },
     orderBy: { fecha: "desc" },
   });
 
@@ -14,7 +17,7 @@ async function obtenerPorId(req, res) {
   const id = Number(req.params.id);
   const pedido = await prisma.pedido.findUnique({
     where: { id },
-    include: { items: { include: { producto: true } } },
+    include: { items: { include: { producto: true } }, factura: FACTURA_RESUMEN },
   });
 
   if (!pedido || pedido.usuarioId !== req.usuario.id) {
@@ -38,6 +41,7 @@ async function listarTodos(req, res) {
     include: {
       usuario: { select: { nombre: true, email: true } },
       items: { include: { producto: true } },
+      factura: FACTURA_RESUMEN,
     },
     orderBy: { fecha: "desc" },
   });

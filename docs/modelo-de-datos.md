@@ -10,6 +10,7 @@ erDiagram
     USUARIO ||--o{ PEDIDO : "realiza"
     PRODUCTO ||--o{ CARRITO_ITEM : "está en"
     PRODUCTO ||--o{ PEDIDO_ITEM : "se vende en"
+    PEDIDO ||--o| FACTURA_PEDIDO : "tiene"
     PEDIDO ||--|{ PEDIDO_ITEM : "contiene"
 
     USUARIO {
@@ -62,6 +63,13 @@ erDiagram
         int cantidad
         decimal precio_unitario
     }
+    FACTURA_PEDIDO {
+        int id PK
+        int pedido_id FK "único"
+        string nombre_archivo
+        bytes contenido "PDF de la factura emitida en ARCA"
+        datetime created_at
+    }
 ```
 
 ## Tablas
@@ -73,6 +81,7 @@ erDiagram
 | `carrito_items` | Carrito persistente: una fila por usuario y producto. |
 | `pedidos` | Compra confirmada por el usuario, con su estado, el total, el costo de envío, la dirección de entrega y los datos del despacho. |
 | `pedido_items` | Detalle de cada pedido: qué producto, cuántas unidades y a qué precio. |
+| `facturas_pedido` | PDF de la factura emitida en ARCA que el administrador adjunta a un pedido pagado o enviado. Una por pedido (reemplazable). |
 
 ## Decisiones de diseño
 
@@ -82,6 +91,7 @@ erDiagram
 - **El rol y el estado del pedido son enums**: la base rechaza valores inválidos.
 - **Los pedidos no se borran con el producto**: no se puede eliminar un producto que figure en un pedido o en un carrito (error `P2003` de Prisma, que el backend traduce a un 409).
 - **El stock se descuenta recién cuando el pago se confirma**, no al crear el pedido.
+- **La factura va en una tabla aparte (`facturas_pedido`)**, no como columna de `pedidos`: así el PDF no viaja dentro de cada listado de pedidos y solo se lee al descargarlo. La carga es manual; la tienda no factura automáticamente.
 
 ## Estados de un pedido
 
@@ -102,3 +112,4 @@ stateDiagram-v2
 | `agregar_reset_password` | Campos de recuperación de contraseña en `usuarios`. |
 | `agregar_direccion_y_envio` | Dirección de entrega, transportista y número de seguimiento en `pedidos`. |
 | `agregar_costo_envio` | Campo `costo_envio` en `pedidos`. |
+| `agregar_factura_pedido` | Tabla `facturas_pedido` (solo agrega la tabla, no modifica datos existentes). |
