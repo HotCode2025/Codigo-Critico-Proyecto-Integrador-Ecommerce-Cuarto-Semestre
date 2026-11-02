@@ -180,18 +180,32 @@ async function confirmarPago(paymentId) {
   const pedido = await prisma.pedido.findUnique({ where: { id: pedidoId }, include: { items: true } });
   if (!pedido || pedido.estado !== "PENDIENTE") return pedido;
 
+  // El webhook de Mercado Pago y /confirmar (el navegador al volver) llaman a
+  // esta función casi al mismo tiempo. La lectura de arriba no alcanza para
+  // evitar que los dos procesen el pago: por eso el cambio de estado lleva
+  // "estado: PENDIENTE" en el where. La base lo aplica de forma atómica, así
+  // que sólo una de las llamadas lo logra (count === 1) y descuenta el stock;
+  // la otra ve count === 0 y no hace nada.
   if (pago.status === "approved") {
-    await prisma.$transaction([
-      prisma.pedido.update({ where: { id: pedidoId }, data: { estado: "PAGADO" } }),
-      ...pedido.items.map((item) =>
-        prisma.producto.update({
+    await prisma.$transaction(async (tx) => {
+      const { count } = await tx.pedido.updateMany({
+        where: { id: pedidoId, estado: "PENDIENTE" },
+        data: { estado: "PAGADO" },
+      });
+      if (count === 0) return;
+
+      for (const item of pedido.items) {
+        await tx.producto.update({
           where: { id: item.productoId },
           data: { stock: { decrement: item.cantidad } },
-        })
-      ),
-    ]);
+        });
+      }
+    });
   } else if (pago.status === "rejected") {
-    await prisma.pedido.update({ where: { id: pedidoId }, data: { estado: "CANCELADO" } });
+    await prisma.pedido.updateMany({
+      where: { id: pedidoId, estado: "PENDIENTE" },
+      data: { estado: "CANCELADO" },
+    });
   }
 
   return prisma.pedido.findUnique({ where: { id: pedidoId } });
