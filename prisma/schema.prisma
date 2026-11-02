@@ -94,10 +94,26 @@ model Pedido {
   transportista      String? @map("transportista")
   numeroSeguimiento  String? @map("numero_seguimiento")
 
-  usuario Usuario      @relation(fields: [usuarioId], references: [id])
+  usuario Usuario        @relation(fields: [usuarioId], references: [id])
   items   PedidoItem[]
+  factura FacturaPedido?
 
   @@map("pedidos")
+}
+
+// Factura emitida en ARCA que el administrador adjunta a un pedido. Va en una
+// tabla aparte (y no como columnas de "pedidos") para que el PDF no viaje
+// dentro de cada listado de pedidos: sólo se lee al descargarla.
+model FacturaPedido {
+  id            Int      @id @default(autoincrement())
+  pedidoId      Int      @unique @map("pedido_id")
+  nombreArchivo String   @map("nombre_archivo")
+  contenido     Bytes
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  pedido Pedido @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+
+  @@map("facturas_pedido")
 }
 
 model PedidoItem {

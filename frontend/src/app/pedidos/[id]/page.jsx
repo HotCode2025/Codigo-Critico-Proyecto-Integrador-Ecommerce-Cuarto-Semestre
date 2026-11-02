@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-import { obtenerPedido, reintentarPedido } from "@/lib/api";
+import { descargarFactura, obtenerPedido, reintentarPedido } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ESTADOS_PEDIDO } from "@/lib/estados-pedido";
@@ -31,6 +31,7 @@ export default function DetallePedidoPage() {
   const [pedido, setPedido] = useState(null);
   const [error, setError] = useState("");
   const [reintentando, setReintentando] = useState(false);
+  const [descargando, setDescargando] = useState(false);
 
   useEffect(() => {
     if (cargandoAuth) return;
@@ -55,6 +56,19 @@ export default function DetallePedidoPage() {
     } catch (err) {
       setError(err instanceof Error ? err.message : "No se pudo iniciar el pago");
       setReintentando(false);
+    }
+  }
+
+  async function bajarFactura() {
+    if (!token || !pedido) return;
+    setError("");
+    setDescargando(true);
+    try {
+      await descargarFactura(token, pedido.id, pedido.factura?.nombreArchivo);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo descargar la factura");
+    } finally {
+      setDescargando(false);
     }
   }
 
@@ -153,10 +167,20 @@ export default function DetallePedidoPage() {
         )}
 
         {(pedido.estado === "PAGADO" || pedido.estado === "ENVIADO") && (
-          <div className="border-t border-border/60 pt-6">
+          <div className="border-t border-border/60 pt-6 flex flex-wrap gap-x-6 gap-y-2">
             <Link href={`/pedidos/${pedido.id}/comprobante`} className="text-sm text-gold hover:underline">
               Ver comprobante de compra →
             </Link>
+            {pedido.factura && (
+              <button
+                type="button"
+                onClick={bajarFactura}
+                disabled={descargando}
+                className="text-sm text-gold hover:underline disabled:opacity-60"
+              >
+                {descargando ? "Descargando..." : "Descargar factura (PDF) →"}
+              </button>
+            )}
           </div>
         )}
 

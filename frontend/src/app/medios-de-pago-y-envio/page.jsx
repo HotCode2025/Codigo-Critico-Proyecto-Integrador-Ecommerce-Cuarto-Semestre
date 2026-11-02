@@ -15,7 +15,7 @@ export default function MediosDePagoYEnvioPage() {
         </p>
         <p>
           Esta tienda <strong className="text-foreground">nunca recibe ni guarda los datos de tu tarjeta</strong>.
-          Cuando el pago se aprueba, tu pedido pasa a «Pagado» y te enviamos por email un comprobante de compra. También lo podés ver e imprimir desde el detalle de tu pedido. El comprobante es la constancia de tu compra y <strong className="text-foreground">no es una factura fiscal</strong>.
+          Cuando el pago se aprueba, tu pedido pasa a «Pagado» y te enviamos por email un comprobante de compra. También lo podés ver e imprimir desde el detalle de tu pedido. El comprobante es la constancia de tu compra y <strong className="text-foreground">no es una factura fiscal</strong>. Cuando la tienda emite la factura de tu compra, la podés descargar en PDF desde el mismo detalle del pedido.
         </p>
       </Seccion>
 
