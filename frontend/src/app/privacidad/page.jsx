@@ -30,7 +30,7 @@ export default function PrivacidadPage() {
         <ul className="list-disc pl-5 space-y-1">
           <li>Gestionar tu cuenta y tus pedidos, y enviarte lo que compraste.</li>
           <li>Verificar que sos mayor de edad, requisito para la venta de alcohol.</li>
-          <li>Enviarte mails relacionados con tu cuenta, como el de recuperación de contraseña.</li>
+          <li>Enviarte mails relacionados con tu cuenta y tus compras: la recuperación de contraseña y el comprobante de compra.</li>
         </ul>
         <p>No usamos tus datos para publicidad ni los vendemos.</p>
       </Seccion>
