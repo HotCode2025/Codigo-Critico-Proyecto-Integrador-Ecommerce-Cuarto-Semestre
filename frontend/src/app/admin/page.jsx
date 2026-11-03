@@ -53,6 +53,9 @@ function TablaProductos() {
           <Link href="/admin/pedidos" className="text-sm text-muted-foreground hover:text-gold transition-colors">
             Ver pedidos y envíos →
           </Link>
+          <Link href="/admin/usuarios" className="text-sm text-muted-foreground hover:text-gold transition-colors">
+            Usuarios →
+          </Link>
           <Link href="/admin/productos/nuevo">
             <Button>Nuevo producto</Button>
           </Link>

@@ -65,3 +65,17 @@ export async function subirFacturaPedido(token, id, archivo) {
   });
   return procesarRespuesta(res);
 }
+
+export async function listarUsuariosAdmin(token) {
+  const res = await fetch(`${API_URL}/admin/usuarios`, { headers: headersAuth(token) });
+  return procesarRespuesta(res);
+}
+
+export async function cambiarRolUsuario(token, id, rol) {
+  const res = await fetch(`${API_URL}/admin/usuarios/${id}/rol`, {
+    method: "PATCH",
+    headers: headersAuth(token),
+    body: JSON.stringify({ rol }),
+  });
+  return procesarRespuesta(res);
+}

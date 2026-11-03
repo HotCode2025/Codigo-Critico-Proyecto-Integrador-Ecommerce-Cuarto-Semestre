@@ -143,8 +143,9 @@ El sitio envía por correo la recuperación de contraseña, el comprobante de co
 
 ## Administración
 
-El panel `/admin` solo está disponible para usuarios con `rol = ADMIN`. Por seguridad, la aplicación no permite que un usuario se promueva a sí mismo. Hay dos formas de crear un administrador.
+El panel `/admin` solo está disponible para usuarios con `rol = ADMIN`. Por seguridad, la aplicación no permite que un usuario se promueva a sí mismo. Hay tres formas de crear un administrador.
 
+- Desde el panel, en `/admin/usuarios`: un administrador ve las cuentas registradas y da o quita el rol de administrador a otra cuenta. No puede cambiar su propio rol, para que la tienda nunca se quede sin administradores.
 - Definir `ADMIN_EMAILS` en `backend/.env`: quien se registre con uno de esos correos queda como administrador. Solo se aplica al registrarse, no a cuentas que ya existen.
 - Modificar el rol directamente en la base, con Prisma Studio (`npm run prisma:studio` desde `/backend`) o con SQL:
 
@@ -152,7 +153,7 @@ El panel `/admin` solo está disponible para usuarios con `rol = ADMIN`. Por seg
 UPDATE usuarios SET rol = 'ADMIN' WHERE email = 'tu-email@ejemplo.com';
 ```
 
-Después hay que volver a iniciar sesión para que el nuevo token incluya el rol.
+Con cualquiera de las tres formas, la persona tiene que volver a iniciar sesión para que la interfaz le muestre el panel.
 
 Desde el panel se pueden crear, editar y borrar productos, con su stock. En `/admin/pedidos` se ven todos los pedidos con su dirección de envío. Para los pedidos pagados, el administrador carga el transportista y el número de seguimiento y los marca como enviados; el cliente ve esos datos en el detalle de su pedido. En los pedidos pagados o enviados también puede adjuntar el PDF de la factura emitida en ARCA (hasta 2 MB), que el cliente descarga desde el detalle. La carga es manual: el sitio no se conecta con ARCA.
 
@@ -183,7 +184,7 @@ Somos el grupo Código Crítico, de Programación IV. El proyecto se organiza en
 | 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
 | 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
 | — | QA, despliegue, credenciales y ensayo final | Todo el equipo (infraestructura de despliegue: Mazara Ariel) | ALT-34 a 38 |
-| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA, pago de pedidos cancelados y ajustes de interfaz | Mazara Ariel | ALT-42 a ALT-52 |
+| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA, pago de pedidos cancelados, ajustes de interfaz y gestión de administradores desde el panel | Mazara Ariel | ALT-42 a ALT-53 |
 
 Los módulos se integran en orden, del 1 al 6, porque cada uno utiliza código de los anteriores.
 
