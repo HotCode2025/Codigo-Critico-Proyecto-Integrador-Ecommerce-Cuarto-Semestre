@@ -19,7 +19,7 @@ El equipo **Código Crítico** trabaja con un marco Scrum simplificado: un backl
 |---|---|---|---|---|
 | Sprint 1 — Cimientos | 22/10 al 26/10 | Repositorio, base de datos, usuarios y catálogo en `main` | ALT-01 a ALT-15 | Terminado |
 | Sprint 2 — Venta y gestión | 27/10 al 02/11 | Carrito y checkout, admin de productos, pedidos y envíos; infraestructura de deploy | ALT-16 a ALT-33, ALT-35, ALT-39, ALT-40 y ALT-41 | Terminado (se extendió hasta el lunes 02/11) |
-| Sprint 3 — Cierre | 03/11 al 04/11 | QA completo, verificación del deploy, credenciales, ensayo y mejoras que surgieron del QA | ALT-34, 36, 37, 38 y ALT-42 a ALT-52 | En curso |
+| Sprint 3 — Cierre | 03/11 al 04/11 | QA completo, verificación del deploy, credenciales, ensayo y mejoras que surgieron del QA | ALT-34, 36, 37, 38 y ALT-42 a ALT-53 | En curso |
 | Presentación | 05/11 | Defensa con demo | — | — |
 
 **Cambio de calendario:** el Sprint 2 se extendió del viernes 30/10 al lunes 02/11 porque el módulo de pedidos y envíos todavía no estaba entregado. Como consecuencia, el Sprint 3 quedó con dos días (03/11 y 04/11).
@@ -69,7 +69,7 @@ Cada issue tiene un código del proyecto en el título (`[ALT-16] API del carrit
 
 ### Estimación
 
-Se estima en puntos de historia: **2** es trivial, **3** chico, **5** mediano y **8** grande o riesgoso. El backlog tiene 52 issues y 192 puntos.
+Se estima en puntos de historia: **2** es trivial, **3** chico, **5** mediano y **8** grande o riesgoso. El backlog tiene 53 issues y 195 puntos.
 
 ### Formato
 
