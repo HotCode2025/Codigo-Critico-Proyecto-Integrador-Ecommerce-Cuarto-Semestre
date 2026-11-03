@@ -183,7 +183,7 @@ Somos el grupo Código Crítico, de Programación IV. El proyecto se organiza en
 | 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
 | 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
 | — | QA, despliegue, credenciales y ensayo final | Todo el equipo (infraestructura de despliegue: Mazara Ariel) | ALT-34 a 38 |
-| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA y pago de pedidos cancelados | Mazara Ariel | ALT-42 a ALT-49 |
+| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA, pago de pedidos cancelados y ajustes de interfaz | Mazara Ariel | ALT-42 a ALT-52 |
 
 Los módulos se integran en orden, del 1 al 6, porque cada uno utiliza código de los anteriores.
 
