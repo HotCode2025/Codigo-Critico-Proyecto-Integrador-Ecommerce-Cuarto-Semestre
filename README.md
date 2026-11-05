@@ -59,7 +59,7 @@ Altos del Uco es una tienda en línea de vinos de bodegas boutique del Valle de 
 /frontend    Next.js
 /backend     Express: controladores, rutas y middleware
 /prisma      Esquema y migraciones (compartido, fuera de /backend)
-/docs        Modelo de datos, guía de estilo y organización del trabajo
+/docs        Manual de uso, anexo del brief, modelo de datos, guía de estilo y organización del trabajo
 ```
 
 `backend/prisma.config.js` dirige la CLI de Prisma a `../prisma/schema.prisma`, por lo que todos los comandos `npx prisma ...` se ejecutan desde `/backend`.
@@ -143,6 +143,8 @@ El sitio envía por correo la recuperación de contraseña, el comprobante de co
 
 ## Administración
 
+La guía de uso completa, para clientes y administradores, está en el [manual de uso](docs/manual-de-uso.md). Los cambios respecto del brief de septiembre están en el [anexo del brief](docs/anexo-brief.md).
+
 El panel `/admin` solo está disponible para usuarios con `rol = ADMIN`. Por seguridad, la aplicación no permite que un usuario se promueva a sí mismo. Hay tres formas de crear un administrador.
 
 - Desde el panel, en `/admin/usuarios`: un administrador ve las cuentas registradas y da o quita el rol de administrador a otra cuenta. No puede cambiar su propio rol, para que la tienda nunca se quede sin administradores.
@@ -184,7 +186,7 @@ Somos el grupo Código Crítico, de Programación IV. El proyecto se organiza en
 | 5 | Panel de administración de productos | Mamani Santino | ALT-24 a 27 |
 | 6 | Pedidos y envíos | Silva Daniel | ALT-28 a 33 |
 | — | QA, despliegue, credenciales y ensayo final | Todo el equipo (infraestructura de despliegue: Mazara Ariel) | ALT-34 a 38 |
-| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA, pago de pedidos cancelados, ajustes de interfaz y gestión de administradores desde el panel | Mazara Ariel | ALT-42 a ALT-53 |
+| — | Mejoras y correcciones surgidas del QA: pago del carrito, stock, footer, comprobante, factura de ARCA, pago de pedidos cancelados, ajustes de interfaz, gestión de administradores desde el panel y documentación final | Mazara Ariel | ALT-42 a ALT-54 |
 
 Los módulos se integran en orden, del 1 al 6, porque cada uno utiliza código de los anteriores.
 
