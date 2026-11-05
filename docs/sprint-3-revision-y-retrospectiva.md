@@ -44,7 +44,7 @@ Además se mergearon otros Pull Requests de documentación: #50 (calendario del 
 | Issues agregados durante el sprint (surgidos del QA y de pedidos del equipo) | 13 issues y 39 puntos (ALT-42 a ALT-54) |
 | Pull Requests mergeados | 19 (#50, #53, #55, #56, #58, #60, #62, #64, #65, #67, #68, #70, #71, #73, #74, #76, #78, #80 y #82) |
 | Pull Requests con aprobación registrada en GitHub | 19 de 19 |
-| Pull Requests con cambios pedidos antes de aprobar | 2 (#74, con dos revisiones con cambios pedidos, y #82) |
+| Pull Requests con cambios pedidos antes de aprobar | 2 (#74 y #82) |
 | Conflictos al integrar | Ninguno |
 | Fallas y casos no cubiertos detectados y corregidos | 3 (ALT-43, ALT-44 y ALT-49) |
 
@@ -86,7 +86,7 @@ Lo que se puede mostrar funcionando en producción (https://www.altosdeluco.com.
 |---|---|---|
 | Planificación | El alcance se definió en la guía de organización y en los issues del milestone | Guía, issues y tablero |
 | Reuniones de seguimiento | Se coordinaron por el grupo de WhatsApp del equipo. No quedó un resumen escrito en el repositorio | Grupo de WhatsApp (sin registro en el repositorio) |
-| Revisión de trabajo | Cada Pull Request tuvo una aprobación registrada en GitHub; el #74 se aprobó recién en la tercera revisión | 19 Pull Requests, de #50 a #82 |
+| Revisión de trabajo | Cada Pull Request tuvo una aprobación registrada en GitHub; el #74 se aprobó después de una revisión con cambios pedidos | 19 Pull Requests, de #50 a #82 |
 | Ensayo de la presentación | Se coordinó por el grupo de WhatsApp. En el ALT-37 registraron su prueba Mazara Ariel, Zuniga Agustina y Gonzalez Joel | ALT-37 (cerrado el 05/11) |
 | Revisión del sprint | Este documento | — |
 | Retrospectiva | Este documento | — |
