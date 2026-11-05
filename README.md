@@ -163,13 +163,19 @@ El costo de envío es una tarifa fija (`COSTO_ENVIO`) con envío gratuito a part
 
 ## Despliegue
 
-| Parte | Servicio | Observaciones |
+Cada servicio cumple una función distinta:
+
+| Servicio | Qué hace | En este proyecto |
 |---|---|---|
-| Base de datos | Neon (PostgreSQL) | |
-| Backend | Render | Despliegue automático al integrar a `main`. Comando de compilación: `npm install && npx prisma generate && npx prisma migrate deploy`, por lo que las migraciones se aplican en cada despliegue. |
-| Frontend | Vercel | Despliegue automático al integrar a `main`. |
-| Dominio | Cloudflare | `www.altosdeluco.com.ar` apunta a Vercel y `altosdeluco.com.ar` redirige a `www`. |
-| Correo | Resend | Dominio `altosdeluco.com.ar` verificado. |
+| NIC Argentina | Registro oficial de los dominios `.ar`. | Registra `altosdeluco.com.ar` e indica que su administración está en Cloudflare. |
+| Cloudflare | Administra el DNS (la «agenda» que indica a qué servidor corresponde cada nombre), las redirecciones y el reenvío de correo. | `www.altosdeluco.com.ar` apunta a Vercel y `altosdeluco.com.ar` redirige a `www`. Los correos que llegan a `vinoteca@altosdeluco.com.ar` se reenvían a la casilla del equipo, y los registros que verifican el dominio en Resend están cargados ahí. |
+| Vercel | Aloja el frontend y lo publica con HTTPS. | Despliegue automático al integrar a `main`. |
+| Render | Ejecuta el backend. | Despliegue automático al integrar a `main`. Comando de compilación: `npm install && npx prisma generate && npx prisma migrate deploy`, por lo que las migraciones se aplican en cada despliegue. |
+| Neon | Base de datos PostgreSQL administrada en la nube. | Base de datos de producción. |
+| Resend | Envío de correos transaccionales. | Comprobante, recuperación de contraseña y arrepentimiento, desde `vinoteca@altosdeluco.com.ar`, con el dominio verificado. |
+| Mercado Pago | Pasarela de pagos. | Checkout Pro, en modo de prueba. |
+
+Quien escribe `www.altosdeluco.com.ar` llega por Cloudflare a Vercel; la página le pide los datos a la API en Render, y Render los consulta en Neon.
 
 El backend corre en el plan gratuito de Render, que lo suspende tras un período sin uso: la primera solicitud puede demorar cerca de un minuto. Conviene consultar `/api/health` antes de una demostración. Cada sprint cerrado tiene su [release](https://github.com/HotCode2025/Codigo-Critico-Proyecto-Integrador-Ecommerce-Cuarto-Semestre/releases) en GitHub.
 
