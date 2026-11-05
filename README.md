@@ -143,7 +143,7 @@ El sitio envía por correo la recuperación de contraseña, el comprobante de co
 
 ## Administración
 
-La guía de uso completa, para clientes y administradores, está en el [manual de uso](docs/manual-de-uso.md). Los cambios respecto del brief de septiembre están en el [anexo del brief](docs/anexo-brief.md).
+La guía de uso completa, para clientes y administradores, está en el [manual de uso](docs/manual-de-uso.md), también [en PDF con capturas](docs/manual-de-uso.pdf). Los cambios respecto del brief de septiembre están en el [anexo del brief](docs/anexo-brief.md).
 
 El panel `/admin` solo está disponible para usuarios con `rol = ADMIN`. Por seguridad, la aplicación no permite que un usuario se promueva a sí mismo. Hay tres formas de crear un administrador.
 

@@ -4,6 +4,8 @@ Altos del Uco es una tienda en línea de vinos de bodegas boutique del Valle de 
 
 **Dirección del sitio:** https://www.altosdeluco.com.ar
 
+**Versión con capturas de pantalla:** [manual-de-uso.pdf](manual-de-uso.pdf). Las imágenes usan datos de ejemplo (nombres, correos y pedidos ficticios) y las pantallas de Mercado Pago son del entorno de pruebas.
+
 > **Aviso para quien prueba el sitio.** Los pagos usan el entorno de pruebas de Mercado Pago: no se cobra dinero real. Para pagar se usan las tarjetas y la cuenta de prueba que da Mercado Pago. No hay que ingresar datos de una tarjeta real.
 
 ---
@@ -32,7 +34,7 @@ Altos del Uco es una tienda en línea de vinos de bodegas boutique del Valle de 
 
 1. Tocá **Ver catálogo** en la portada.
 2. Cada vino aparece en una tarjeta con su foto, nombre, varietal, añada, bodega, región y precio.
-3. Para acotar la lista usá los filtros: **Varietal**, **Bodega**, **Añada**, **Precio mín.** y **Precio máx.** Se pueden combinar. Cada tarjeta indica si el vino está «En stock» o «Sin stock»; un vino sin stock no se puede agregar al carrito.
+3. Para acotar la lista usá los filtros: **Varietal**, **Bodega**, **Añada**, **Precio mín.** y **Precio máx.** Se pueden combinar, y **Limpiar filtros** los borra. Cada tarjeta indica si el vino está «En stock» o «Sin stock»; un vino sin stock no se puede agregar al carrito.
 4. Tocá un vino para ver su ficha: descripción, notas de cata y maridaje.
 
 ### 1.5 Comprar
@@ -71,7 +73,7 @@ Si el pago no se completó, abrí el pedido en **Mis pedidos** y tocá **Volver 
 
 ### 1.8 Arrepentimiento de compra
 
-Podés arrepentirte de una compra desde **Arrepentimiento de compra**, en el pie de página. Completás el **número de pedido**, tu **correo** y el **motivo**. La tienda recibe la solicitud por mail y vos recibís una copia.
+Podés arrepentirte de una compra desde **Arrepentimiento de compra**, en el pie de página. Tenés **10 días corridos desde que recibís el producto**, sin necesidad de explicar el motivo. Completás el **número de pedido** (lo encontrás en **Mis pedidos**), el **correo** con el que compraste y, si querés, el **motivo** (es opcional). La tienda recibe la solicitud por mail y vos recibís una copia.
 
 ### 1.9 Información y contacto
 
