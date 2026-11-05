@@ -59,7 +59,7 @@ El pago lo procesa Mercado Pago: **los datos de tu tarjeta nunca pasan por la ti
 | Pendiente de pago | El pedido se creó pero todavía no se pagó. |
 | Pagado | El pago se aprobó. La tienda prepara el envío. |
 | Enviado | El pedido salió. Se ve el transportista y el número de seguimiento. |
-| Cancelado | El pago se rechazó o no se completó. |
+| Cancelado | El pago se rechazó o no se completó, o el pedido se reemplazó por uno nuevo con **Volver a comprar**. |
 
 - **Detalle de un pedido.** Al abrir un pedido ves los productos, el subtotal, el envío, el total, la dirección y el seguimiento del envío.
 - **Comprobante imprimible.** Desde el detalle, **Ver comprobante de compra** abre una versión para imprimir o guardar como PDF.
@@ -67,7 +67,7 @@ El pago lo procesa Mercado Pago: **los datos de tu tarjeta nunca pasan por la ti
 
 ### 1.7 Pagar de nuevo un pedido pendiente o cancelado
 
-Si el pago no se completó, abrí el pedido en **Mis pedidos** y tocá **Volver a comprar**. El sitio te lleva otra vez a Mercado Pago **con el mismo pedido**, sin crear uno nuevo. Si el pago se aprueba, el pedido pasa a «Pagado».
+Si el pago no se completó, abrí el pedido en **Mis pedidos** y tocá **Volver a comprar**. El sitio **crea un pedido nuevo** con los mismos productos y la misma dirección de envío, pasa el pedido anterior a «Cancelado» y te lleva a Mercado Pago para pagar el nuevo. Si el pago se aprueba, el pedido nuevo pasa a «Pagado». Si algún producto ya no tiene stock suficiente, el sitio lo avisa y no crea el pedido nuevo.
 
 ### 1.8 Arrepentimiento de compra
 
@@ -116,6 +116,6 @@ En **Panel admin → Usuarios** se ven todas las cuentas registradas.
 
 **No me llegó el mail.** Revisá la carpeta de spam. Los correos salen de `vinoteca@altosdeluco.com.ar`.
 
-**Me aparece un pedido en «Cancelado» pero quiero comprarlo igual.** Abrilo desde **Mis pedidos** y tocá **Volver a comprar**.
+**Me aparece un pedido en «Cancelado» pero quiero comprarlo igual.** Abrilo desde **Mis pedidos** y tocá **Volver a comprar**: se crea un pedido nuevo con los mismos productos.
 
 **¿Se descuenta el stock al agregar al carrito?** No: se descuenta cuando el pago se aprueba, y una sola vez por compra.

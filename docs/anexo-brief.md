@@ -46,7 +46,7 @@ El brief define como alcance de la etapa el circuito de compra y el panel de adm
 | Dominio propio | `altosdeluco.com.ar` (NIC Argentina, con DNS en Cloudflare). Los correos salen de `vinoteca@altosdeluco.com.ar` y lo que llega a esa dirección se reenvía a la casilla del equipo |
 | Ajustes de interfaz | Encabezado en celular, pantallas de acceso y carrito solo con sesión iniciada |
 
-También se corrigieron dos fallas que apareció el QA: la ventana de pago de Mercado Pago que no se abría desde el carrito en Firefox y el stock que se descontaba dos veces.
+También se corrigieron dos fallas que encontró el QA: la ventana de pago de Mercado Pago que no se abría desde el carrito en Firefox y el stock que se descontaba dos veces.
 
 ## 4. Requerimientos: actualización
 
